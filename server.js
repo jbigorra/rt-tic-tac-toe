@@ -20,5 +20,9 @@ app.listen(PORT, () => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('pages/index');
+});
+
+app.get('/room', (req, res) => {
+  res.render('pages/room');
 });
