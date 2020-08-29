@@ -1,3 +1,62 @@
+body {
+  padding: 5vw;
+  margin: 0;
+}
+
 .hidden {
   display: none;
 }
+
+.game {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+  .game__board {
+    display: flex;
+    flex-flow: row wrap;
+    width: 90vw;
+    height: 90vw;
+    border: 1px solid black;
+  }
+    .game__board__cell {
+      cursor: pointer;
+      display: flex;
+      width: calc(90vw / 3);
+      height: calc(90vw / 3);
+      background: aliceblue;
+      box-shadow: inset 1px 1px 1px 1px black;
+      align-items: center;
+      justify-content: center;
+    }
+  .game__players {
+    width: 90vw;
+  }
+  .game__players__list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 0;
+  }
+    .game__players__list__item {
+      list-style: none;
+    }
+.room {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+  .room__invitation {
+    display: flex;
+    width: 90vw;
+    flex-flow: row wrap;
+  }
+    .room__invitation__button {
+      cursor: pointer;
+      appearance: none;
+      background-color: #599dd9;
+      border: 2px solid #599dd9;
+      box-sizing: border-box;
+      margin: 0 0 0.5rem;
+    }

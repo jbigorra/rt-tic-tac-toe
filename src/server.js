@@ -3,6 +3,7 @@ const morgan = require('morgan');
 // const helmet = require('helmet');
 const cors = require('cors');
 const path = require('path');
+const methodOverride = require('method-override');
 const { v4: uuid } = require('uuid');
 
 const app = express();
@@ -14,10 +15,11 @@ app
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
   // .use(helmet())
+  .use(methodOverride('_method'))
   .use(cors())
   .use(morgan('common'));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 1235;
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
@@ -29,22 +31,29 @@ function Room (roomId, users = []) {
 }
 
 const roomRepository = {
-  rooms: [],
+  rooms: [new Room('asdfasd', ['Juancho', 'Ana'])],
   getRoom: function (roomId) {
+    console.log(this.rooms);
     return this.rooms.find(r => r.id === roomId);
   },
   createRoom: function (roomId, username) {
-    this.rooms.push(new Room(roomId, username));
+    this.rooms.push(new Room(roomId, [username]));
+    console.log(this.rooms);
   },
   addUserToRoom: function (roomId, username) {
     const room = this.getRoom(roomId);
     if (!room) throw new Error("Room doesn't exists");
     room.users.push(username);
+    console.log(this.rooms);
   }
 };
 
 app.get('/', (req, res) => {
-  res.render('pages/index');
+  const payload = {};
+
+  if (req.query.error) payload.error = req.query.error;
+
+  res.render('pages/index', { payload });
 });
 
 app.post('/room', (req, res) => {
@@ -54,9 +63,17 @@ app.post('/room', (req, res) => {
 });
 
 app.patch('/room', (req, res) => {
-
+  try {
+    const { roomId, username } = req.body;
+    console.log(req.body);
+    roomRepository.addUserToRoom(roomId, username);
+    res.redirect(`/room/${roomId}`);
+  } catch (e) {
+    console.error(e.message);
+  }
 });
 
-app.get('/room/:roomId', (req, res) => {
-  res.render('pages/room', { roomId: req.params.roomId });
+app.get('/room/:roomId', (req, res, next) => {
+  const room = roomRepository.getRoom(req.params.roomId);
+  res.render('pages/room', { room });
 });

@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<%- include("../partials/head") %>
+  <%- include("../partials/head") %>
+  <script src="/room.js" type="module"></script>
 </head>
 <body>
 	<%- include("../partials/header") %>
 <div class="main">
-	<div>
-		<p><%= roomId %></p>
+	<div class="room">
+    <div class="room__invitation">
+      <button class="room__invitation__button" data-roomId="<%= room.id %>">Invite</button>
+    </div>
+    <div class="game">
+      <div class="game__board">
+        <div class="game__board__cell"></div>
+        <div class="game__board__cell"></div>
+        <div class="game__board__cell"></div>
+        <div class="game__board__cell"></div>
+        <div class="game__board__cell"></div>
+        <div class="game__board__cell"></div>
+        <div class="game__board__cell"></div>
+        <div class="game__board__cell"></div>
+        <div class="game__board__cell"></div>
+      </div>
+      <div class="game__players">
+        <ol class="game__players__list">
+          <% room.users.forEach((user, number) => { %>
+            <li class="game__players__list__item">
+              <strong><%- " " + ++number %>:</strong>
+              <%- " " + user %>
+            </li>
+          <% }) %>
+        </ol>
+      </div>
+    </div>
 	</div>
 </div>
 	<%- include("../partials/footer") %>
