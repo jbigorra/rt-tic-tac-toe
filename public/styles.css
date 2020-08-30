@@ -21,6 +21,7 @@ body {
     border: 1px solid black;
   }
     .game__board__cell {
+      font-size: 3rem;
       cursor: pointer;
       display: flex;
       width: calc(90vw / 3);
