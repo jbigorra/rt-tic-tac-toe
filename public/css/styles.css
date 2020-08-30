@@ -1,6 +1,7 @@
 body {
   padding: 5vw;
   margin: 0;
+  font-family: 'Nunito', sans-serif;
 }
 
 .hidden {
@@ -17,36 +18,60 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
+  .game__header {
+    width: 90vw;
+    background-color: black;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding-bottom: 10px;
+    margin-bottom: -10px;
+  }
+  .game__header__text {
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    margin: 0.5rem 0 0.5rem;
+  }
   .game__board {
     display: flex;
     flex-flow: row wrap;
     width: 90vw;
     height: 90vw;
-    border: 1px solid black;
+    background-color: antiquewhite;
+    border-radius: 5%;
+    z-index: 5;
+    /* border-top-right-radius: 5%;
+    border-top-left-radius: 5%; */
   }
     .game__board__cell {
-      font-size: 3rem;
       cursor: pointer;
       display: flex;
       width: calc(90vw / 3);
       height: calc(90vw / 3);
-      background: aliceblue;
-      box-shadow: inset 1px 1px 1px 1px black;
+      font-size: 3rem;
       align-items: center;
       justify-content: center;
+      border: 2px solid black;
+      box-sizing: border-box;
     }
   .game__players {
     width: 90vw;
   }
-  .game__players__list {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    padding: 0;
-  }
-    .game__players__list__item {
-      list-style: none;
+    .game__players__list {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      padding: 1.15rem 0.40rem 0.25rem 0.40rem;
+      margin-top: -1rem;
+      background-color: black;
+      z-index: 1;
+      border-bottom-left-radius: 7px;
+      border-bottom-right-radius: 7px;
     }
+      .game__players__list__item {
+        list-style: none;
+        color: white;
+      }
 
 .room {
   display: flex;
@@ -65,6 +90,15 @@ body {
       border: 2px solid #599dd9;
       box-sizing: border-box;
       margin: 0 0 0.5rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 5%;
+      box-shadow: 1px 1px 3px 1px #2f5373;
+    }
+    .room__invitation__button:hover {
+      background-color: #5da5e4;
+      border: 2px solid #5da5e4;
+      transition: backgroud-color .25s ease-in,
+      border 0.25s ease-in;
     }
 
 .copy__feedback {
@@ -80,13 +114,17 @@ body {
     animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
   }
 
+.fa-user--green {
+  color: rgb(0, 202, 0);
+}
+
 @keyframes fadeInOut {
   0% {
     opacity: 0;
   }
   30% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(10px);
   }
   90% {
     opacity: 0;

@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
   <%- include("../partials/head") %>
-  <script src="/room.js" type="module"></script>
+  <script src="/js/room.js" type="module"></script>
 </head>
 <body>
-	<%- include("../partials/header") %>
 <div class="main">
 	<div class="room">
-    <div class="room__invitation">
-      <button class="room__invitation__button" data-roomId="<%= room.id %>">Invite</button>
-      <span class="copy__feedback copy__feedback--hidden">Room Id copied to clipboard!</span>
-    </div>
     <div class="game">
+      <div class="game__header">
+        <h1 class="game__header__text">Tic tac toe</h1>
+      </div>
       <div class="game__board">
         <div class="game__board__cell"></div>
         <div class="game__board__cell"></div>
@@ -28,11 +26,15 @@
         <ol class="game__players__list">
           <% room.users.forEach((user, number) => { %>
             <li class="game__players__list__item">
-              <strong><%- " " + ++number %>:</strong>
-              <%- " " + user %>
+              <i class="fa fa-user fa-user--green" aria-hidden="true"></i>
+              <%- ": " + user ? user : '?' %>
             </li>
           <% }) %>
         </ol>
+      </div>
+      <div class="room__invitation">
+        <button class="room__invitation__button" data-roomId="<%= room.id %>">Invite</button>
+        <span class="copy__feedback copy__feedback--hidden">Room Id copied to clipboard!</span>
       </div>
     </div>
 	</div>
