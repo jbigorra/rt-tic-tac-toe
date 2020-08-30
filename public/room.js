@@ -20,25 +20,32 @@ function setupBoard () {
 }
 
 function setupInviteButton () {
+  const inviteButton = document.querySelector('.room__invitation__button');
+  inviteButton.addEventListener('click', onInviteButtonClick);
+
   function onInviteButtonClick (e) {
     e.preventDefault();
     document.execCommand('copy');
     copyToClipboard(this.dataset.roomid);
     showCopyFeedback();
   }
-
   function showCopyFeedback () {
     const copyFeedback = document.querySelector('.copy__feedback');
-    copyFeedback.classList.remove('copy__feedback--hidden');
-    copyFeedback.classList.add('copy__feedback--fade-in-out');
-    setTimeout(() => {
-      copyFeedback.classList.add('copy__feedback--hidden');
-      copyFeedback.classList.remove('copy__feedback--fade-in-out');
-    }, 1500);
+    fadeIn(copyFeedback);
+    setTimeout(fadeOut(copyFeedback), 1500);
   }
 
-  const inviteButton = document.querySelector('.room__invitation__button');
-  inviteButton.addEventListener('click', onInviteButtonClick);
+  function fadeIn (el) {
+    el.classList.remove('copy__feedback--hidden');
+    el.classList.add('copy__feedback--fade-in-out');
+  }
+
+  function fadeOut (el) {
+    return () => {
+      el.classList.add('copy__feedback--hidden');
+      el.classList.remove('copy__feedback--fade-in-out');
+    };
+  }
 }
 
 function copyToClipboard (str) {

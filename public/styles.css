@@ -7,6 +7,10 @@ body {
   display: none;
 }
 
+.header__text {
+  text-align: center;
+}
+
 .game {
   display: flex;
   flex-direction: row;
