@@ -42,6 +42,7 @@ body {
     .game__players__list__item {
       list-style: none;
     }
+
 .room {
   display: flex;
   flex-flow: row wrap;
@@ -60,3 +61,33 @@ body {
       box-sizing: border-box;
       margin: 0 0 0.5rem;
     }
+
+.copy__feedback {
+  opacity: 0;
+  margin-left: 10px;
+}
+  .copy__feedback--hidden {
+    display: none;
+  }
+  .copy__feedback--fade-in-out {
+    animation-name: fadeInOut;
+    animation-duration: 1.5s;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    display: none;
+  }
+}
