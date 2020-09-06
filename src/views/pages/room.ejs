@@ -4,7 +4,7 @@
   <%- include("../partials/head") %>
   <script src="/js/room.js" type="module"></script>
 </head>
-<body>
+<body data-room-id="<%= room.id %>" data-player-id="<%= playerId %> ">
 <div class="main">
 	<div class="room">
     <div class="game">
@@ -23,13 +23,23 @@
         <div class="game__board__cell"></div>
       </div>
       <div class="game__players">
-        <ol class="game__players__list">
+        <!-- <ol class="game__players__list">
           <% room.users.forEach((user, number) => { %>
             <li class="game__players__list__item">
               <i class="fa fa-user fa-user--green" aria-hidden="true"></i>
               <%- ": " + user ? user : '?' %>
             </li>
           <% }) %>
+        </ol> -->
+        <ol class="game__players__list">
+          <li class="game__players__list__item">
+            <i class="fa fa-user fa-user--green" aria-hidden="true"></i> :
+            <span id="player-1-name">???...</span>
+          </li>
+          <li class="game__players__list__item">
+            <i class="fa fa-user fa-user--green" aria-hidden="true"></i> :
+            <span id="player-2-name">???...</span>
+          </li>
         </ol>
       </div>
       <div class="room__invitation">
@@ -39,6 +49,7 @@
     </div>
 	</div>
 </div>
-	<%- include("../partials/footer") %>
+  <%- include("../partials/footer") %>
+  <script src="/socket.io/socket.io.js"></script>
 </body>
 </html>

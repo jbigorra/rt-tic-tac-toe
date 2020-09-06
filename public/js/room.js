@@ -2,8 +2,8 @@ window.onload = run;
 
 function run () {
   setupBoard();
-
   setupInviteButton();
+  handleSocket();
 }
 
 function setupBoard () {
@@ -65,3 +65,15 @@ function copyToClipboard (str) {
     document.getSelection().addRange(selected);
   }
 };
+
+function handleSocket () {
+  const socket = io();
+  const body = document.querySelector('body');
+  const roomId = body.dataset.roomid;
+  const playerId = body.dataset.playerid;
+  socket.emit('player-joined-room', { playerId, roomId });
+
+  socket.on('player-ready', (players = []) => {
+    players.forEach((p, i) => (document.querySelector(`player-${i}-name`).innerHTML = p));
+  });
+}
