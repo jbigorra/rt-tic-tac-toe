@@ -45,3 +45,6 @@ const io = socketio(http);
 const socketioHandler = require('./socketio/socketioHandler');
 
 io.on('connection', socketioHandler);
+
+// ------ Export express app for testing purposes -------
+module.exports = app;
